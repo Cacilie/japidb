@@ -1,0 +1,25 @@
+{
+  "name": "japidb",
+  "version": "0.0.1",
+  "description": "japidb is an improved way to implement offline storage",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cacilie/japidb.git"
+  },
+  "keywords": [],
+  "author": "Edgar Arroyo <cacilie.github.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cacilie/japidb/issues"
+  },
+  "homepage": "https://github.com/Cacilie/japidb#readme",
+  "devDependencies": {
+    "typescript": "^2.7.2"
+  }
+}
