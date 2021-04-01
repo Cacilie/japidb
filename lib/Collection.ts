@@ -29,11 +29,12 @@ export default class Collection {
 
 
     get(id: string | number) {
+        let data = []
         const localMeta = localStorage.getItem(`@meta->${this.name}`) || ''
         const meta: Metadata = JSON.parse(localMeta)
         const key = `${meta.name}->${id}`
         const localData = localStorage.getItem(key) || ''
-        const data = JSON.parse(localData)
+        if(localData.length > 0) data = JSON.parse(localData)
 
         return data;
 
