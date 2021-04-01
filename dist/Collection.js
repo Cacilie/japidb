@@ -5,7 +5,7 @@ var Collection = /** @class */ (function () {
         this.name = name;
         this.idField = idField;
         var localMetadata = localStorage.getItem("@meta->" + name) || '';
-        var metadata = JSON.parse(localMetadata);
+        var metadata = localMetadata.length > 0 ? JSON.parse(localMetadata) : null;
         var meta = localMetadata.length > 0 ? metadata : {
             name: name,
             idField: idField,
@@ -14,11 +14,13 @@ var Collection = /** @class */ (function () {
         localStorage.setItem("@meta->" + name, JSON.stringify(meta));
     }
     Collection.prototype.get = function (id) {
+        var data = [];
         var localMeta = localStorage.getItem("@meta->" + this.name) || '';
         var meta = JSON.parse(localMeta);
         var key = meta.name + "->" + id;
         var localData = localStorage.getItem(key) || '';
-        var data = JSON.parse(localData);
+        if (localData.length > 0)
+            data = JSON.parse(localData);
         return data;
     };
     Collection.prototype.find = function (params) {
