@@ -15,7 +15,7 @@ export default class Collection {
         this.idField = idField;
 
         const localMetadata = localStorage.getItem(`@meta->${name}`) || '';
-        const metadata: Metadata = JSON.parse(localMetadata)
+        const metadata: Metadata = localMetadata.length > 0 ? JSON.parse(localMetadata) : null;
 
 
         const meta: Metadata = localMetadata.length > 0 ? metadata : {
