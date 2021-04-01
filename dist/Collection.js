@@ -35,7 +35,7 @@ var Collection = /** @class */ (function () {
             var element = this.get(index);
             data.push(element);
         }
-        if (Object.keys(params).length > 0) {
+        if (params && Object.keys(params).length > 0) {
             data = data.filter(function (element) {
                 var shouldReturn = false;
                 for (var _i = 0, _a = Object.keys(params); _i < _a.length; _i++) {

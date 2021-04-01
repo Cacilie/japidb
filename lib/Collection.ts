@@ -55,7 +55,7 @@ export default class Collection {
             data.push(element)
         }
 
-        if(Object.keys(params).length > 0){
+        if(params && Object.keys(params).length > 0){
             data = data.filter(element => {
                 let shouldReturn = false;
                 for(let param of Object.keys(params)){
