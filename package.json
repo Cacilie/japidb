@@ -1,6 +1,6 @@
 {
   "name": "japidb",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "japidb is an improved way to implement offline storage",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
