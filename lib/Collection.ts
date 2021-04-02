@@ -1,7 +1,7 @@
 interface Metadata {
     name: string;
     idField: string;
-    indexes: Array<string>;
+    indexes: Array<string | number>;
 }
 
 export default class Collection {
@@ -34,32 +34,32 @@ export default class Collection {
         const meta: Metadata = JSON.parse(localMeta)
         const key = `${meta.name}->${id}`
         const localData = localStorage.getItem(key) || ''
-        if(localData.length > 0) data = JSON.parse(localData)
+        if (localData.length > 0) data = JSON.parse(localData)
 
         return data;
 
     }
 
-    find(params?: any) : Array<any> {
+    find(params?: any): Array<any> {
         const localMeta = localStorage.getItem(`@meta->${this.name}`) || ''
         const meta: Metadata = JSON.parse(localMeta)
         const { indexes } = meta;
 
-        let data : Array<any> = []
+        let data: Array<any> = []
 
-        if(indexes.length === 0) return data;
+        if (indexes.length === 0) return data;
 
 
-        for(let index of indexes){
+        for (let index of indexes) {
             const element = this.get(index)
             data.push(element)
         }
 
-        if(params && Object.keys(params).length > 0){
+        if (params && Object.keys(params).length > 0) {
             data = data.filter(element => {
                 let shouldReturn = false;
-                for(let param of Object.keys(params)){
-                    if(params[param] === element[param])shouldReturn = true
+                for (let param of Object.keys(params)) {
+                    if (params[param] === element[param]) shouldReturn = true
                     else shouldReturn = false
                 }
 
@@ -73,7 +73,7 @@ export default class Collection {
 
     save(data: any) {
         const localMeta = localStorage.getItem(`@meta->${this.name}`) || ''
-        const meta: Metadata = JSON.parse(localMeta)
+        const meta: Metadata = localMeta.length > 0 ? JSON.parse(localMeta) : null
         const key = `${meta.name}->${data[meta.idField]}`
         localStorage.setItem(key, JSON.stringify(data))
         const { indexes } = meta;
@@ -85,14 +85,15 @@ export default class Collection {
 
     remove(id: string | number) {
         const localMeta = localStorage.getItem(`@meta->${this.name}`) || ''
-        const meta: Metadata = JSON.parse(localMeta)
+        const meta: Metadata = localMeta.length > 0  ? JSON.parse(localMeta) : null
         const key = `${meta.name}->${id}`
         const localData = localStorage.getItem(key) || ''
         const data = JSON.parse(localData)
         localStorage.removeItem(key)
 
         const { indexes } = meta;
-        indexes.splice(indexes.indexOf(String(id)), 1);
+        const indexOfDeleted = indexes.indexOf(id)
+        indexes.splice(indexOfDeleted, 1);
         meta.indexes = indexes;
         localStorage.setItem(`@meta->${this.name}`, JSON.stringify(meta))
 
