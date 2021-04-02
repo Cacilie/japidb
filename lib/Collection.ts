@@ -74,6 +74,9 @@ export default class Collection {
     save(data: any) {
         const localMeta = localStorage.getItem(`@meta->${this.name}`) || ''
         const meta: Metadata = localMeta.length > 0 ? JSON.parse(localMeta) : null
+
+        if(!data[meta.idField]) throw new Error('Invalid document, data does not include declared id field')
+
         const key = `${meta.name}->${data[meta.idField]}`
         localStorage.setItem(key, JSON.stringify(data))
         const { indexes } = meta;

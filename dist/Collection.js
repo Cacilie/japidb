@@ -52,7 +52,9 @@ var Collection = /** @class */ (function () {
     };
     Collection.prototype.save = function (data) {
         var localMeta = localStorage.getItem("@meta->" + this.name) || '';
-        var meta = JSON.parse(localMeta);
+        var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
+        if (!data[meta.idField])
+            throw new Error('Invalid document, data does not include declared id field');
         var key = meta.name + "->" + data[meta.idField];
         localStorage.setItem(key, JSON.stringify(data));
         var indexes = meta.indexes;
@@ -64,13 +66,14 @@ var Collection = /** @class */ (function () {
     };
     Collection.prototype.remove = function (id) {
         var localMeta = localStorage.getItem("@meta->" + this.name) || '';
-        var meta = JSON.parse(localMeta);
+        var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
         var key = meta.name + "->" + id;
         var localData = localStorage.getItem(key) || '';
         var data = JSON.parse(localData);
         localStorage.removeItem(key);
         var indexes = meta.indexes;
-        indexes.splice(indexes.indexOf(String(id)), 1);
+        var indexOfDeleted = indexes.indexOf(id);
+        indexes.splice(indexOfDeleted, 1);
         meta.indexes = indexes;
         localStorage.setItem("@meta->" + this.name, JSON.stringify(meta));
         return data;
