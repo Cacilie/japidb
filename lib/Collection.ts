@@ -29,41 +29,40 @@ export default class Collection {
 
 
     get(id: string | number) {
-        let data = []
-        const localMeta = localStorage.getItem(`@meta->${this.name}`) || ''
-        const meta: Metadata = JSON.parse(localMeta)
-        const key = `${meta.name}->${id}`
-        const localData = localStorage.getItem(key) || ''
-        if (localData.length > 0) data = JSON.parse(localData)
+        let data = [];
+        const localMeta = localStorage.getItem(`@meta->${this.name}`) || '';
+        const meta: Metadata = localMeta.length > 0 ? JSON.parse(localMeta) : null;
+        const key = `${meta.name}->${id}`;
+        const localData = localStorage.getItem(key) || '';
+        if (localData.length > 0) data = localData.length > 0 ? JSON.parse(localData) : null;
 
         return data;
 
     }
 
     find(params?: any): Array<any> {
-        const localMeta = localStorage.getItem(`@meta->${this.name}`) || ''
-        const meta: Metadata = JSON.parse(localMeta)
+        const localMeta = localStorage.getItem(`@meta->${this.name}`) || '';
+        const meta: Metadata = localMeta.length > 0 ? JSON.parse(localMeta) : null;
         const { indexes } = meta;
 
-        let data: Array<any> = []
+        let data: Array<any> = [];
 
         if (indexes.length === 0) return data;
 
-
         for (let index of indexes) {
-            const element = this.get(index)
-            data.push(element)
+            const element = this.get(index);
+            data.push(element);
         }
 
         if (params && Object.keys(params).length > 0) {
             data = data.filter(element => {
                 let shouldReturn = false;
                 for (let param of Object.keys(params)) {
-                    if (params[param] === element[param]) shouldReturn = true
-                    else shouldReturn = false
+                    if (params[param] === element[param]) shouldReturn = true;
+                    else shouldReturn = false;
                 }
 
-                return shouldReturn
+                return shouldReturn;
             })
         }
 
@@ -72,35 +71,35 @@ export default class Collection {
     }
 
     save(data: any) {
-        const localMeta = localStorage.getItem(`@meta->${this.name}`) || ''
-        const meta: Metadata = localMeta.length > 0 ? JSON.parse(localMeta) : null
+        const localMeta = localStorage.getItem(`@meta->${this.name}`) || '';
+        const meta: Metadata = localMeta.length > 0 ? JSON.parse(localMeta) : null;
 
-        if(!data[meta.idField]) throw new Error('Invalid document, data does not include declared id field')
+        if (!data[meta.idField]) throw new Error('Invalid document, data does not include declared id field');
 
-        const key = `${meta.name}->${data[meta.idField]}`
-        localStorage.setItem(key, JSON.stringify(data))
+        const key = `${meta.name}->${data[meta.idField]}`;
+        localStorage.setItem(key, JSON.stringify(data));
         const { indexes } = meta;
-        if (indexes.indexOf(data[meta.idField]) === -1) indexes.push(data[meta.idField])
+        if (indexes.indexOf(data[meta.idField]) === -1) indexes.push(data[meta.idField]);
         meta.indexes = indexes;
-        localStorage.setItem(`@meta->${this.name}`, JSON.stringify(meta))
+        localStorage.setItem(`@meta->${this.name}`, JSON.stringify(meta));
         return data;
     }
 
     remove(id: string | number) {
-        const localMeta = localStorage.getItem(`@meta->${this.name}`) || ''
-        const meta: Metadata = localMeta.length > 0  ? JSON.parse(localMeta) : null
-        const key = `${meta.name}->${id}`
-        const localData = localStorage.getItem(key) || ''
-        const data = JSON.parse(localData)
-        localStorage.removeItem(key)
+        const localMeta = localStorage.getItem(`@meta->${this.name}`) || '';
+        const meta: Metadata = localMeta.length > 0 ? JSON.parse(localMeta) : null;
+        const key = `${meta.name}->${id}`;
+        const localData = localStorage.getItem(key) || '';
+        const data = JSON.parse(localData);
+        localStorage.removeItem(key);
 
         const { indexes } = meta;
-        const indexOfDeleted = indexes.indexOf(id)
+        const indexOfDeleted = indexes.indexOf(id);
         indexes.splice(indexOfDeleted, 1);
         meta.indexes = indexes;
-        localStorage.setItem(`@meta->${this.name}`, JSON.stringify(meta))
+        localStorage.setItem(`@meta->${this.name}`, JSON.stringify(meta));
 
-        return data
+        return data;
     }
 
 

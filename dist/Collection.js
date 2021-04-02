@@ -16,16 +16,16 @@ var Collection = /** @class */ (function () {
     Collection.prototype.get = function (id) {
         var data = [];
         var localMeta = localStorage.getItem("@meta->" + this.name) || '';
-        var meta = JSON.parse(localMeta);
+        var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
         var key = meta.name + "->" + id;
         var localData = localStorage.getItem(key) || '';
         if (localData.length > 0)
-            data = JSON.parse(localData);
+            data = localData.length > 0 ? JSON.parse(localData) : null;
         return data;
     };
     Collection.prototype.find = function (params) {
         var localMeta = localStorage.getItem("@meta->" + this.name) || '';
-        var meta = JSON.parse(localMeta);
+        var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
         var indexes = meta.indexes;
         var data = [];
         if (indexes.length === 0)

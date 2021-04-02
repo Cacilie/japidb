@@ -1,2 +1,4 @@
 import Collection from './Collection';
-export { Collection };
+import Bulb from './Bulb';
+import Item from './Item';
+export { Collection, Bulb, Item };
