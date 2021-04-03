@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/Cacilie/japidb.git"
   },
-  "keywords": [],
+  "keywords": ["offline", "storage", "localStorage", "japi", "db", "WebSql"],
   "author": "Edgar Arroyo <cacilie.github.io>",
   "license": "ISC",
   "bugs": {
