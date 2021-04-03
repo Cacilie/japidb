@@ -115,3 +115,5 @@ const removed = task.remove(1)
 
 > Test it on JSFiddle [https://jsfiddle.net/cacilie/pdu7fytw/26/](https://jsfiddle.net/cacilie/pdu7fytw/26/)
 
+Thanks for the icon: Icons designed by [Freepik](https://www.freepik.com) from [www.flaticon.es](https://www.flaticon.es/)
+
