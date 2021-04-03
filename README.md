@@ -4,7 +4,9 @@ description: 'japidb is an easy, improved way to implement offline storage at yo
 
 # Getting Started
 
-Implement a powerful offline storage with japidb. Forget about using localstorage, do not worry and use japi.
+japidb is an easy and improved way to implement offline storage at your webapps.
+
+
 
 
 
