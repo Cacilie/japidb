@@ -14,7 +14,7 @@ var Collection = /** @class */ (function () {
         localStorage.setItem("@meta->" + name, JSON.stringify(meta));
     }
     Collection.prototype.get = function (id) {
-        var data = [];
+        var data = null;
         var localMeta = localStorage.getItem("@meta->" + this.name) || '';
         var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
         var key = meta.name + "->" + id;

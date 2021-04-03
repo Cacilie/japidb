@@ -29,7 +29,7 @@ export default class Collection {
 
 
     get(id: string | number) {
-        let data = [];
+        let data = null;
         const localMeta = localStorage.getItem(`@meta->${this.name}`) || '';
         const meta: Metadata = localMeta.length > 0 ? JSON.parse(localMeta) : null;
         const key = `${meta.name}->${id}`;
