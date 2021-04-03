@@ -6,6 +6,8 @@ description: 'japidb is an easy, improved way to implement offline storage at yo
 
 japidb is an easy and improved way to implement offline storage at your web apps. Forget about localstorage, do not worry, and use japi.
 
+> Read the full documentation at [https://cacilie.gitbook.io/japidb/](https://cacilie.gitbook.io/japidb/)
+
 ```text
 npm i -s japidb
 ```
@@ -87,5 +89,29 @@ This will retrieve all the `tasks` in which `done` is equal `true`.
 }]
 ```
 
+Also, with the get method,  it is posible to get  a document based on its primary key.
 
+```javascript
+const task1 = task.get(1)
+// printing task 1
+{
+  done: true,
+  id: 1,
+  task: "Code japidb"
+}
+```
+
+An also, you can remove a document using its primary key
+
+```javascript
+const removed = task.remove(1)
+// printing removed
+{
+  done: true,
+  id: 1,
+  task: "Code japidb"
+}
+```
+
+> Test it on JSFiddle [https://jsfiddle.net/cacilie/pdu7fytw/26/](https://jsfiddle.net/cacilie/pdu7fytw/26/)
 
