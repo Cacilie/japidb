@@ -1,5 +1,7 @@
 ---
-description: 'japidb is an easy, improved way to implement offline storage at your web app.'
+description: >-
+  japidb ist einer einfach und verbessert richtung zum implementieren Offline
+  Storage fur seine web apps.
 ---
 
 # Einstieg
@@ -12,9 +14,9 @@ japidb ist einer einfach und verbessert richtung zum implementieren Offline Stor
 npm i -s japidb
 ```
 
-japidb has 3 types of storage, `Collection`, `Bulb`, and `Item`.
+japidb hat 3 arten der Langerung, `Collection`, `Bulb`, und `Item`.
 
-`Collection` are the analogous of tables. You can store multiple `documents` over there. \(Like rows in sql and documents at mongo\)
+`Collection` sind der analog fur `tables`. Sie Konnen store multiple `documents` over there. \(Like rows in sql and documents at mongo\)
 
 ```javascript
 import { Collection } from 'https://cdn.skypack.dev/japidb';
