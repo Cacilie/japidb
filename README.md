@@ -2,11 +2,11 @@
 description: 'japidb is an easy, improved way to implement offline storage at your web app.'
 ---
 
-# Getting Started
+# Einstieg
 
-japidb is an easy and improved way to implement offline storage at your web apps. Forget about localstorage, do not worry, and use japi.
+japidb ist einer einfach und verbessert richtung zum implementieren Offline Storage fur seine web apps. Vergessen localstorage, benutzen Sie japi.
 
-> Read the full documentation at [https://cacilie.gitbook.io/japidb/](https://cacilie.gitbook.io/japidb/)
+> Lessen Site der voll documentation im [https://cacilie.gitbook.io/japidb/](https://cacilie.gitbook.io/japidb/)
 
 ```text
 npm i -s japidb
