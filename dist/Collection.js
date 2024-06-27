@@ -4,27 +4,27 @@ var Collection = /** @class */ (function () {
     function Collection(name, idField) {
         this.name = name;
         this.idField = idField;
-        var localMetadata = localStorage.getItem("@meta->" + name) || '';
+        var localMetadata = localStorage.getItem("@meta->".concat(name)) || '';
         var metadata = localMetadata.length > 0 ? JSON.parse(localMetadata) : null;
         var meta = localMetadata.length > 0 ? metadata : {
             name: name,
             idField: idField,
             indexes: []
         };
-        localStorage.setItem("@meta->" + name, JSON.stringify(meta));
+        localStorage.setItem("@meta->".concat(name), JSON.stringify(meta));
     }
     Collection.prototype.get = function (id) {
         var data = null;
-        var localMeta = localStorage.getItem("@meta->" + this.name) || '';
+        var localMeta = localStorage.getItem("@meta->".concat(this.name)) || '';
         var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
-        var key = meta.name + "->" + id;
+        var key = "".concat(meta.name, "->").concat(id);
         var localData = localStorage.getItem(key) || '';
         if (localData.length > 0)
             data = localData.length > 0 ? JSON.parse(localData) : null;
         return data;
     };
     Collection.prototype.find = function (params) {
-        var localMeta = localStorage.getItem("@meta->" + this.name) || '';
+        var localMeta = localStorage.getItem("@meta->".concat(this.name)) || '';
         var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
         var indexes = meta.indexes;
         var data = [];
@@ -51,23 +51,23 @@ var Collection = /** @class */ (function () {
         return data;
     };
     Collection.prototype.save = function (data) {
-        var localMeta = localStorage.getItem("@meta->" + this.name) || '';
+        var localMeta = localStorage.getItem("@meta->".concat(this.name)) || '';
         var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
         if (!data[meta.idField])
             throw new Error('Invalid document, data does not include declared id field');
-        var key = meta.name + "->" + data[meta.idField];
+        var key = "".concat(meta.name, "->").concat(data[meta.idField]);
         localStorage.setItem(key, JSON.stringify(data));
         var indexes = meta.indexes;
         if (indexes.indexOf(data[meta.idField]) === -1)
             indexes.push(data[meta.idField]);
         meta.indexes = indexes;
-        localStorage.setItem("@meta->" + this.name, JSON.stringify(meta));
+        localStorage.setItem("@meta->".concat(this.name), JSON.stringify(meta));
         return data;
     };
     Collection.prototype.remove = function (id) {
-        var localMeta = localStorage.getItem("@meta->" + this.name) || '';
+        var localMeta = localStorage.getItem("@meta->".concat(this.name)) || '';
         var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
-        var key = meta.name + "->" + id;
+        var key = "".concat(meta.name, "->").concat(id);
         var localData = localStorage.getItem(key) || '';
         var data = JSON.parse(localData);
         localStorage.removeItem(key);
@@ -75,7 +75,7 @@ var Collection = /** @class */ (function () {
         var indexOfDeleted = indexes.indexOf(id);
         indexes.splice(indexOfDeleted, 1);
         meta.indexes = indexes;
-        localStorage.setItem("@meta->" + this.name, JSON.stringify(meta));
+        localStorage.setItem("@meta->".concat(this.name), JSON.stringify(meta));
         return data;
     };
     return Collection;
