@@ -3,11 +3,13 @@ interface Metadata {
     initialValue: any;
 }
 
+type ItemValue = string | boolean | number;
+
 export default class Item {
     name: string;
-    initialValue: any;
+    initialValue: ItemValue;
 
-    constructor(name: string, initialValue: any){
+    constructor(name: string, initialValue: ItemValue){
         this.name = name;
         this.initialValue = initialValue;
 
@@ -18,13 +20,13 @@ export default class Item {
             initialValue
         }
 
-        localStorage.setItem(`@meta->${name}`, JSON.stringify(meta));
+        localStorage.setItem(metaKey, JSON.stringify(meta));
 
 
         const key = `Item->${name}`
 
         const localItem = localStorage.getItem(key) || '';
-        const item : any = localItem.length > 0 ? JSON.parse(localItem) : null;
+        const item : any = localItem.length > 0 ? localItem : null;
 
         if(!item){
             localStorage.setItem(key, String(initialValue))
@@ -40,20 +42,17 @@ export default class Item {
         const key = `Item->${meta.name}`
 
         const localItem = localStorage.getItem(key) || '';
-        const item : any = localItem.length > 0 ? JSON.parse(localItem) : null;
+        const item : any = localItem.length > 0 ? localItem : null;
 
         return item;
     }
 
-    save(value: any){
+    save(value: ItemValue){
         const localMeta = localStorage.getItem(`@meta->${this.name}`) || '';
         const meta: Metadata = localMeta.length > 0 ? JSON.parse(localMeta) : null;
         const key = `Item->${meta.name}`;
         localStorage.setItem(key, String(value));
 
-
         return value;
-
-
     }
 }

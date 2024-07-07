@@ -6,9 +6,9 @@ import LocalStorage from "./__mocks__/LocalStorage";
 global.localStorage = new LocalStorage;
 
 describe("Collection", () => {
-    it('to be created', () =>  {
-      const collection = new Collection("collection0", "primary")
-      expect(collection).toBeTruthy()
+    it('to be created', () => {
+        const collection = new Collection("collection0", "primary")
+        expect(collection).toBeTruthy()
     })
 
     it('saves data and then retrieves', () => {
@@ -46,7 +46,8 @@ describe("Collection", () => {
 
         collection3.save(record0)
 
-        expect(collection3.find({"value" : "1"}).length).toBe(1)
+        expect(collection3.find({ "value": "1" }).length).toBe(1)
+        expect(collection3.find({ value: "2" }).length).toBe(0)
     })
 
     it('record is not saved if it does not include primary key', () => {
