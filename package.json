@@ -21,7 +21,7 @@
     "WebSql"
   ],
   "author": "E. A. Arroyo <cacilie.github.io>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Cacilie/japidb/issues"
   },
