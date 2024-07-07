@@ -4,13 +4,13 @@ var Item = /** @class */ (function () {
     function Item(name, initialValue) {
         this.name = name;
         this.initialValue = initialValue;
-        var metaKey = "@meta->" + name;
+        var metaKey = "@meta->".concat(name);
         var meta = {
             name: name,
             initialValue: initialValue
         };
-        localStorage.setItem("@meta->" + name, JSON.stringify(meta));
-        var key = "Item->" + name;
+        localStorage.setItem("@meta->".concat(name), JSON.stringify(meta));
+        var key = "Item->".concat(name);
         var localItem = localStorage.getItem(key) || '';
         var item = localItem.length > 0 ? JSON.parse(localItem) : null;
         if (!item) {
@@ -18,17 +18,17 @@ var Item = /** @class */ (function () {
         }
     }
     Item.prototype.get = function () {
-        var localMeta = localStorage.getItem("@meta->" + this.name) || '';
+        var localMeta = localStorage.getItem("@meta->".concat(this.name)) || '';
         var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
-        var key = "Item->" + meta.name;
+        var key = "Item->".concat(meta.name);
         var localItem = localStorage.getItem(key) || '';
         var item = localItem.length > 0 ? JSON.parse(localItem) : null;
         return item;
     };
     Item.prototype.save = function (value) {
-        var localMeta = localStorage.getItem("@meta->" + this.name) || '';
+        var localMeta = localStorage.getItem("@meta->".concat(this.name)) || '';
         var meta = localMeta.length > 0 ? JSON.parse(localMeta) : null;
-        var key = "Item->" + meta.name;
+        var key = "Item->".concat(meta.name);
         localStorage.setItem(key, String(value));
         return value;
     };
