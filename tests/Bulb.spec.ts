@@ -1,20 +1,27 @@
 import { Bulb } from "../lib";
+import LocalStorage from "./__mocks__/LocalStorage";
 
-const mockGetItem = jest.fn();
-const mockSetItem = jest.fn();
-const mockRemoveItem = jest.fn();
 
-Object.defineProperty(global, "localStorage", {
-  value: {
-    getItem: (...args: string[]) => mockGetItem(...args),
-    setItem: (...args: string[]) => mockSetItem(...args),
-    removeItem: (...args: string[]) => mockRemoveItem(...args),
-  },
-});
+
+global.localStorage = new LocalStorage;
 
 describe("Bulb", () => {
-    test('to be created', () =>  {
-        const bulb = new Bulb("switch", false)
-        expect(bulb).toBeTruthy()
-    })
+  it('to be created', () => {
+    const bulb = new Bulb("switch0", false)
+    expect(bulb).toBeTruthy()
+  })
+
+  it('switch and gets the value', () => {
+    const bulb1 = new Bulb("switch1", false)
+    bulb1.switch()
+    expect(bulb1.get()).toBe(true)
+  })
+
+  it('switch the bulb and then resets to original value', () => {
+    const bulb2 = new Bulb("switch2", false)
+    bulb2.switch()
+    expect(bulb2.get()).toBe(true)
+    bulb2.reset()
+    expect(bulb2.get()).toBe(false)
+  })
 })
